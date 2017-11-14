@@ -1,7 +1,0 @@
-###
-# PoolPal
-version_prefix = 0
-version_suffix = 1
-version = version_prefix + version_suffix * .1
-
-print("version  " + version)
