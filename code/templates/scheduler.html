@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+  <head>
+
+    <style>
+      #nav{
+      display: inline-block;
+      }
+    </style>
+
+    <h2>Scheduler</h2>
+  </head>
+
+  <body>
+
+    <h3>Existing Schedules:</h3>
+    <ul>
+      {% for row in rows %}
+
+        {% if row[2] == 0 %}
+          {% set startTime = '12 am' %}
+        {% elif row[2] < 12 %}
+          {% set startTime = (row[2]|string) + ' am'  %}
+        {% elif row[2] == 12 %}
+          {% set startTime = (row[2]|string) + ' pm'  %}
+        {% elif row[2] > 12 %}
+          {% set startTime = ((row[2] - 12)|string) + ' pm' %}
+        {% endif %}
+
+        {% if row[3] == 0 %}
+          {% set stopTime = '12 am' %}
+        {% elif row[3] < 12 %}
+          {% set stopTime = (row[3]|string) + ' am' %}
+        {% elif row[3] == 12 %}
+          {% set stopTime = (row[3]|string) + ' pm'  %}
+        {% elif row[3] > 12 %}
+          {% set stopTime = ((row[3] - 12)|string) + ' pm' %}
+        {% endif %}
+
+        {% set id = 'pool' + (row[0]|string) %}
+
+        {% set function = (row[1]|string) %}
+
+        <li>{{ function }} is set to turn on at {{ startTime }} and turn off at {{ stopTime }} (id = {{ id }})</li>
+
+      {% endfor %}
+    </ul>
+
+    <br>
+
+    <form action = "{{ url_for('scheduler') }}" method = POST>
+      <h3>Add New Schedule:</h3>
+      <fieldset>
+        {{ form.function.label }}<br>
+        {{ form.function }}<br>
+
+        {{ form.startTime.label }}<br>
+        {{ form.startTime }}<br>
+
+        {{ form.stopTime.label }}<br>
+        {{ form.stopTime }}<br>
+
+        {{ form.submit }}
+      </fieldset>
+    </form>
+  </body>
+
+  <footer>
+    <nav>
+      <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/edit">Edit existing schedule</a></li>
+    </nav>
+  </footer>
+</html>

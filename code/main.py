@@ -64,7 +64,7 @@ def index():
         }
 
     # Pass the template data into the template index.html and serve it to the user
-    return render_template('testindex.html', **templateData)
+    return render_template('index.html', **templateData)
 
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<changePin>/<action>")

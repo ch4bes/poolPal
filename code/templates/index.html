@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+   <title>PoolPal</title>
+   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+   <!-- My CSS -->
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+   <h1><strong>PoolPal</strong> {{ version }}</h1>
+</head>
+
+<body>
+
+   <h3 id="message">{{ message }}</h3>
+
+   <hr>
+   {% for pin in pins %}
+   <h2>{{ pins[pin].name }}
+   {% if pins[pin].state == false %}
+      is currently <strong id="off">off</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
+   {% else %}
+      is currently <strong id="on">on</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
+   {% endif %}
+   {% endfor %}
+
+   <hr>
+   <h2>Scheduler:</h2>
+
+   <div class="row"><div class="col-md-2">
+   <a href="/scheduler" class="btn btn-block btn-lg btn-default" role="button">Add Schedule</a></div></div>
+
+   <hr>
+   <h2>Data:</h2>
+   <h3>Coming Soon</h3>
+
+</body>
+</html>
