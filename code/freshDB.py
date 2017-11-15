@@ -1,4 +1,9 @@
-import sqlite3
+#!/usr/bin/python3
+import os, sqlite3
+
+# get proper home directory
+user = os.getenv('SUDO_USER')
+home = '/home/' + user
 
 dbFile = '~/poolPal/poolSchedules.db'
 
