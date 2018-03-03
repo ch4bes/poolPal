@@ -107,7 +107,7 @@ def action(changePin, action):
 @app.route("/scheduler", methods = ["GET", "POST"])
 def scheduler():
 
-    with sql.connect("~/poolPal/poolSchedules.db") as con:
+    with sql.connect("~/poolPal/code/poolSchedules.db") as con:
         cur = con.cursor()
     rows = cur.execute("SELECT * FROM schedules")
 
@@ -140,7 +140,7 @@ def scheduler():
         finally:
             con.close()
             # run scheduler.py to add database items to cron
-            subprocess.run('sudo python ~/poolPal/scheduler.py')
+            subprocess.run('sudo python ~/poolPal/code/scheduler.py')
             return render_template("result.html", msg = msg)
 
 if __name__ == "__main__":
