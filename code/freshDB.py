@@ -5,7 +5,7 @@ import os, sqlite3
 user = os.getenv('SUDO_USER')
 home = '/home/' + user
 
-dbFile = '~/poolPal/code/poolSchedules.db'
+dbFile = home + '/poolPal/code/poolSchedules.db'
 
 # delete former db, it it exists
 f = open(dbFile, 'w')
