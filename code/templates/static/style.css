@@ -1,0 +1,24 @@
+body{
+    color: paleturquoise;
+    background: skyblue;
+    background-image: url("http://i.imgur.com/fmqQugL.jpg?1");
+    background-repeat: no-repeat;
+    -webkit-background-size: 2000px 3000px;
+    background-size: cover;
+}
+
+h1{
+    color: dodgerblue;
+}
+
+#message{
+    color: cyan;
+}
+
+#off{
+    color: lightgrey;
+}
+
+#on{
+    color: steelblue;
+}
