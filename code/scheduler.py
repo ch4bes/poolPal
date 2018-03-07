@@ -8,7 +8,7 @@ cron = CronTab('root')
 user = os.getenv('SUDO_USER')
 home = '/home/' + user
 
-con = sql.connect(home + '/pool/poolPal/poolSchedules.db')
+con = sql.connect(home + '/poolPal/code/poolSchedules.db')
 con.row_factory = sql.Row
 
 cur = con.cursor()
