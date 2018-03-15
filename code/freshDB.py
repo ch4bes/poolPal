@@ -7,7 +7,7 @@ home = '/home/' + user
 
 dbFile = home + '/poolPal/code/poolSchedules.db'
 
-# delete former db, it it exists
+# delete former db, if it exists
 f = open(dbFile, 'w')
 f.close()
 
