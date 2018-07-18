@@ -18,7 +18,7 @@ import sqlite3 as sql
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, url_for
 from schedulerform import SchedulerForm
-import datetime, subprocess
+import datetime, os
 
 GPIO.setmode(GPIO.BCM)
 
@@ -140,7 +140,7 @@ def scheduler():
         finally:
             con.close()
             # run scheduler.py to add database items to cron
-            subprocess.run('sudo python ~/poolPal/code/scheduler.py')
+            os.system('sudo python ~/poolPal/code/scheduler.py')
             return render_template("result.html", msg = msg)
 
 if __name__ == "__main__":
