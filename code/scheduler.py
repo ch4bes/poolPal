@@ -1,6 +1,7 @@
 import sqlite3 as sql
 from crontab import CronTab
 import os, datetime
+from main import pins
 
 cron = CronTab('root')
 
@@ -22,12 +23,9 @@ for index, row in enumerate(rows):
     startTime = datetime.time(row[2]).strftime('%I %p')
     stopTime = datetime.time(row[3]).strftime('%I %p')
 
-    if function == 'Light':
-        pin = 17
-    elif function == 'Waterfall':
-        pin = 18
-    elif function == 'Main Pump':
-        pin = 23
+    for key, value in pins.items():
+        if value['name'] == function:
+            pin = key
     
     print(str(index + 1) + ' - ' + function + '(pin ' + str(pin) + ') will turn on at ' + startTime + ' and turn off at ' + stopTime + ' (id=' + id + ')')
     
