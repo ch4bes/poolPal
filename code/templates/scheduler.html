@@ -15,37 +15,42 @@
   <body>
 
     <h3>Existing Schedules:</h3>
-    <ul>
-      {% for row in rows %}
 
-        {% if row[2] == 0 %}
-          {% set startTime = '12 am' %}
-        {% elif row[2] < 12 %}
-          {% set startTime = (row[2]|string) + ' am'  %}
-        {% elif row[2] == 12 %}
-          {% set startTime = (row[2]|string) + ' pm'  %}
-        {% elif row[2] > 12 %}
-          {% set startTime = ((row[2] - 12)|string) + ' pm' %}
-        {% endif %}
+    {% if count == 0 %}
+      <p>{{ msg }}..</p>
+    {% else %}
+      <ul>
+        {% for row in rows %}
 
-        {% if row[3] == 0 %}
-          {% set stopTime = '12 am' %}
-        {% elif row[3] < 12 %}
-          {% set stopTime = (row[3]|string) + ' am' %}
-        {% elif row[3] == 12 %}
-          {% set stopTime = (row[3]|string) + ' pm'  %}
-        {% elif row[3] > 12 %}
-          {% set stopTime = ((row[3] - 12)|string) + ' pm' %}
-        {% endif %}
+          {% if row[2] == 0 %}
+            {% set startTime = '12 am' %}
+          {% elif row[2] < 12 %}
+            {% set startTime = (row[2]|string) + ' am'  %}
+          {% elif row[2] == 12 %}
+            {% set startTime = (row[2]|string) + ' pm'  %}
+          {% elif row[2] > 12 %}
+            {% set startTime = ((row[2] - 12)|string) + ' pm' %}
+          {% endif %}
 
-        {% set id = 'pool' + (row[0]|string) %}
+          {% if row[3] == 0 %}
+            {% set stopTime = '12 am' %}
+          {% elif row[3] < 12 %}
+            {% set stopTime = (row[3]|string) + ' am' %}
+          {% elif row[3] == 12 %}
+            {% set stopTime = (row[3]|string) + ' pm'  %}
+          {% elif row[3] > 12 %}
+            {% set stopTime = ((row[3] - 12)|string) + ' pm' %}
+          {% endif %}
 
-        {% set function = (row[1]|string) %}
+          {% set id = 'pool' + (row[0]|string) %}
 
-        <li>{{ function }} is set to turn on at {{ startTime }} and turn off at {{ stopTime }} (id = {{ id }})</li>
+          {% set function = (row[1]|string) %}
 
-      {% endfor %}
-    </ul>
+          <li>{{ function }} is set to turn on at {{ startTime }} and turn off at {{ stopTime }} (id = {{ id }})</li>
+
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     <br>
 
