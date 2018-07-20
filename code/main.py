@@ -114,8 +114,19 @@ def scheduler():
     rows = cur.execute("SELECT * FROM schedules")
 
     form = SchedulerForm()
+    
+    count = 0
+    for row in rows:
+        count += 1
+        
+    if count > 0:
+        msg = None
+    else:
+        msg = 'Nothing currently scheduled'
 
     templateData = {
+        'count': count,
+        'msg': msg,
         'form': form,
         'rows': rows
     }
