@@ -39,8 +39,7 @@ def timestamp():
 
 message = ''
 
-server_ip = subprocess.check_output('hostname -I', shell=True)
-server_ip = server_ip.replace('\n', '')
+server_ip = os.popen('ip addr show eth0').read().split("inet ")[1].split("/")[0]
 
 app = Flask(__name__)
 app.secret_key = 'development key'
