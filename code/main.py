@@ -23,7 +23,7 @@ import datetime, os
 GPIO.setmode(GPIO.BCM)
 
 pins = { # Pin Dictionary to store each pin number, name, and state
-    17 : {'name':'Pool Light', 'state':GPIO.HIGH},
+    17 : {'name':'Light', 'state':GPIO.HIGH},
     18 : {'name':'Waterfall', 'state':GPIO.HIGH},
     23 : {'name':'Main Pump', 'state':GPIO.HIGH}
     }
