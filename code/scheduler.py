@@ -4,9 +4,7 @@ import os, datetime
 
 cron = CronTab('root')
 
-# get proper home directory
-user = os.getenv('SUDO_USER')
-home = '/home/' + user
+home = '/home/pi'
 
 con = sql.connect(home + '/poolPal/code/poolSchedules.db')
 con.row_factory = sql.Row
