@@ -20,6 +20,9 @@ from flask import Flask, render_template, request, redirect, url_for
 from schedulerform import SchedulerForm
 import datetime, os
 
+appDir = '/home/pi/poolPal/code/'
+dbFile = appDir + 'poolSchedules.db'
+
 GPIO.setmode(GPIO.BCM)
 
 pins = { # Pin Dictionary to store each pin number, name, and state
@@ -106,7 +109,7 @@ def action(changePin, action):
 @app.route("/scheduler", methods = ["GET", "POST"])
 def scheduler():
 
-    with sql.connect("~/poolPal/code/poolSchedules.db") as con:
+    with sql.connect(dbFile) as con:
         cur = con.cursor()
     rows = cur.execute("SELECT * FROM schedules")
 
@@ -139,7 +142,7 @@ def scheduler():
         finally:
             con.close()
             # run scheduler.py to add database items to cron
-            os.system('sudo python ~/poolPal/code/scheduler.py')
+            os.system('sudo python ' + appDir + 'scheduler.py')
             return render_template("result.html", msg = msg)
 
 if __name__ == "__main__":
