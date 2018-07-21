@@ -1,13 +1,11 @@
 import sqlite3 as sql
 from crontab import CronTab
 import os, datetime
-from main import pins
+from main import pins, dbFile
 
 cron = CronTab('root')
 
-home = '/home/pi'
-
-con = sql.connect(home + '/poolPal/code/poolSchedules.db')
+con = sql.connect(dbFile)
 con.row_factory = sql.Row
 
 cur = con.cursor()
