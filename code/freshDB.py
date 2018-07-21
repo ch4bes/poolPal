@@ -1,11 +1,7 @@
 #!/usr/bin/python3
 import os, sqlite3
 
-# get proper home directory
-user = os.getenv('SUDO_USER')
-home = '/home/' + user
-
-dbFile = home + '/poolPal/code/poolSchedules.db'
+dbFile = '/home/pi/poolPal/code/poolSchedules.db'
 
 # delete former db, if it exists
 f = open(dbFile, 'w')
