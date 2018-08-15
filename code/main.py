@@ -82,10 +82,10 @@ def action(changePin, action):
         # Set the pin high:
         GPIO.output(changePin, GPIO.HIGH)
         # Save the status message to be passed into the template:                                          
-        message = "Turned " + deviceName + " on."
+        message = f"Turned {deviceName} on."
     if action == "off":
         GPIO.output(changePin, GPIO.LOW)
-        message = "Turned " + deviceName + " off."
+        message = f"Turned {deviceName} off."
 
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
@@ -140,7 +140,7 @@ def scheduler():
             function = request.form['function']
             startTime = request.form['startTime']
             stopTime = request.form['stopTime']
-            print(str(function + ", " + startTime + ", " + stopTime))
+            print(f"{function}, {startTime}, {stopTime}")
 
             cur.execute("INSERT INTO schedules (function, startTime, stopTime) VALUES (?,?,?)",(function, startTime, stopTime) )
             con.commit()
