@@ -59,12 +59,20 @@
       <fieldset>
         {{ form.function.label }}<br>
         {{ form.function }}<br>
+        
+        <br>
+        
+        Start Time:<br>
+        {{ form.startHour.label }}: {{ form.startHour }}<br>
+        {{ form.startMin.label }}: {{ form.startMin }} (optional)<br>
 
-        {{ form.startTime.label }}<br>
-        {{ form.startTime }}<br>
-
-        {{ form.stopTime.label }}<br>
-        {{ form.stopTime }}<br>
+        <br>
+        
+        Stop Time:<br>
+        {{ form.stopHour.label }}: {{ form.stopHour }}<br>
+        {{ form.stopMin.label }}: {{ form.stopMin }} (optional)<br>
+        
+        <br>
 
         {{ form.submit }}
       </fieldset>
