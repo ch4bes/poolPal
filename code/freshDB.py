@@ -8,5 +8,5 @@ f.close()
 
 # create fresh db
 conn = sqlite3.connect(dbFile)
-conn.execute('CREATE TABLE schedules (id INTEGER PRIMARY KEY, function TEXT, startTime INTEGER, stopTime INTEGER)')
+conn.execute('CREATE TABLE schedules (id INTEGER PRIMARY KEY, function TEXT, startHour INTEGER, startMin INTEGER, stopHour INTEGER, stopMin INTEGER)')
 conn.close()
