@@ -20,33 +20,56 @@
       <p>{{ msg }}..</p>
     {% else %}
       <ul>
-        {% for row in rows %}
 
-          {% if row[2] == 0 %}
-            {% set startTime = '12 am' %}
-          {% elif row[2] < 12 %}
-            {% set startTime = (row[2]|string) + ' am'  %}
-          {% elif row[2] == 12 %}
-            {% set startTime = (row[2]|string) + ' pm'  %}
-          {% elif row[2] > 12 %}
-            {% set startTime = ((row[2] - 12)|string) + ' pm' %}
+        {% for schedule in schedules %}
+
+          {% set id = 'pool' + (schedule[0]|string) %}
+
+          {% set function = (schedule[1]|string) %}
+
+          {% if schedule[2] < 12 %}
+            {% set startHour = (schedule[2]|string) %}
+            {% set startPer = 'am' %}
+            {% if schedule[2] == 0 %}
+              {% set startHour = '12' %}
+            {% endif %}
+
+          {% elif schedule[2] >= 12 %}
+            {% set startHour = ((schedule[2] - 12)|string) %}
+            {% set startPer = 'pm' %}
+            {% if schedule[2] == 12 %}
+              {% set startHour = (schedule[2]|string) %}
+            {% endif %}
           {% endif %}
 
-          {% if row[3] == 0 %}
-            {% set stopTime = '12 am' %}
-          {% elif row[3] < 12 %}
-            {% set stopTime = (row[3]|string) + ' am' %}
-          {% elif row[3] == 12 %}
-            {% set stopTime = (row[3]|string) + ' pm'  %}
-          {% elif row[3] > 12 %}
-            {% set stopTime = ((row[3] - 12)|string) + ' pm' %}
+          {% set startMin = (schedule[3]|string) %}
+          {% if startMin == '0' %}
+            {% set startMin = '00' %}
           {% endif %}
 
-          {% set id = 'pool' + (row[0]|string) %}
+          {% if schedule[4] < 12 %}
+            {% set stopHour = (schedule[4]|string) %}
+            {% set stopPer = 'am' %}
+            {% if schedule[4] == 0 %}
+              {% set stopHour = '12' %}
+            {% endif %}
 
-          {% set function = (row[1]|string) %}
+          {% elif schedule[4] >= 12 %}
+            {% set stopHour = ((schedule[4] - 12)|string) %}
+            {% set stopPer = 'pm' %}
+            {% if schedule[4] == 12 %}
+              {% set stopHour = (schedule[4]|string) %}
+            {% endif %}
+          {% endif %}
 
-          <li>{{ function }} is set to turn on at {{ startTime }} and turn off at {{ stopTime }} (id = {{ id }})</li>
+          {% set stopMin = (schedule[5]|string) %}
+          {% if stopMin == '0' %}
+            {% set stopMin = '00' %}
+          {% endif %}
+
+          <li>
+            {{ function }} {% if function.endswith('s') == true %}are{% elif function.endswith('s') == false %}is{% endif %} set to turn on at {{ startHour }}:{{ startMin }} {{ startPer }} and turn off at {{ stopHour }}:{{ stopMin }} {{ stopPer }} (id = {{ id }})
+         </li>
 
         {% endfor %}
       </ul>
@@ -59,19 +82,19 @@
       <fieldset>
         {{ form.function.label }}<br>
         {{ form.function }}<br>
-        
+
         <br>
-        
+
         Start Time:<br>
         {{ form.startHour.label }}: {{ form.startHour }}<br>
         {{ form.startMin.label }}: {{ form.startMin }} (optional)<br>
 
         <br>
-        
+
         Stop Time:<br>
         {{ form.stopHour.label }}: {{ form.stopHour }}<br>
         {{ form.stopMin.label }}: {{ form.stopMin }} (optional)<br>
-        
+
         <br>
 
         {{ form.submit }}
