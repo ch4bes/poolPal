@@ -123,11 +123,13 @@ def scheduler():
         try:
             print('Try loop started...')
             function = request.form['function']
-            startTime = request.form['startTime']
-            stopTime = request.form['stopTime']
-            print('%s, %s, %s' % (funtion, startTime, stopTime))
+            startHour = request.form['startHour']
+            startMin = request.form['startMin']
+            stopHour = request.form['stopHour']
+            stopMin = request.form['stopMin']
+            print('{}, {}:{}, {}:{}'.format(function, startHour, startMin, stopHour, stopMin))
 
-            cur.execute('INSERT INTO schedules (function, startTime, stopTime) VALUES (?,?,?)',(function, startTime, stopTime) )
+            cur.execute('INSERT INTO schedules (function, startHour, startMin, stopHour, stopMin) VALUES (?,?,?,?,?)',(function, startHour, startMin, stopHour, stopMin) )
             con.commit()
             msg = 'Record successfully added'
 
