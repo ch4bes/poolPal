@@ -100,10 +100,10 @@ def scheduler():
 
     form = SchedulerForm()
     
-    count = 0
+   schedules = []
     for row in rows:
-        count += 1
-        
+        schedules.append(row)
+    count = len(schedules)    
     if count > 0:
         msg = None
     else:
@@ -113,7 +113,7 @@ def scheduler():
         'count': count,
         'msg': msg,
         'form': form,
-        'rows': rows
+        'schedules': schedules
     }
 
     if request.method == 'GET':
