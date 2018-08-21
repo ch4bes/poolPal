@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import os, sqlite3
-
-dbFile = '/home/pi/poolPal/code/poolSchedules.db'
+from conf import dbFile
 
 # delete former db, if it exists
 f = open(dbFile, 'w')
