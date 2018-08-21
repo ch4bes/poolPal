@@ -66,7 +66,7 @@ def action(changePin, action):
     if action == 'on':
         # Set the pin high:
         GPIO.output(changePin, GPIO.HIGH)
-        # Save the status message to be passed into the template:                                          
+        # Save the status message to be passed into the template:
         message = 'Turned ' + deviceName + ' on.'
     if action == 'off':
         GPIO.output(changePin, GPIO.LOW)
@@ -99,11 +99,11 @@ def scheduler():
     rows = cur.execute('SELECT * FROM schedules')
 
     form = SchedulerForm()
-    
-   schedules = []
+
+    schedules = []
     for row in rows:
         schedules.append(row)
-    count = len(schedules)    
+    count = len(schedules)
     if count > 0:
         msg = None
     else:
