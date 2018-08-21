@@ -3,13 +3,6 @@
 ###########
 # PoolPal #
 ###########
-
-version_prefix = 0
-version_suffix = 1
-version = version_prefix + version_suffix * .1
-
-print("PoolPal - version  " + str(version))
-
 #########
 # Setup #
 #########
@@ -18,18 +11,10 @@ import sqlite3 as sql
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, url_for
 from schedulerform import SchedulerForm
+from conf import *
 import datetime, os
 
-appDir = '/home/pi/poolPal/code/'
-dbFile = appDir + 'poolSchedules.db'
-
 GPIO.setmode(GPIO.BCM)
-
-pins = { # Pin Dictionary to store each pin number, name, and state
-    17 : {'name':'Light', 'state':GPIO.HIGH},
-    18 : {'name':'Waterfall', 'state':GPIO.HIGH},
-    23 : {'name':'Main Pump', 'state':GPIO.HIGH}
-    }
 
 # Set each pin as an output and set initial state:
 for pin in pins:
