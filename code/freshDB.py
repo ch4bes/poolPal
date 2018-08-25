@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os, sqlite3
-from conf import dbFile
+from conf import sched_db as dbFile
 
 # delete former db, if it exists
 f = open(dbFile, 'w')
