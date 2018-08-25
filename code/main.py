@@ -27,8 +27,6 @@ def timestamp():
 
 message = ''
 
-server_ip = os.popen('ip addr show eth0').read().split('inet ')[1].split('/')[0]
-
 app = Flask(__name__)
 app.secret_key = 'development key'
 
@@ -84,7 +82,7 @@ def action(changePin, action):
         'message' : message
     }
 
-    if ip == server_ip:
+    if ip == pool_pi_ip:
         return render_template('curl.html', **templateData)
 
     else:
@@ -94,7 +92,7 @@ def action(changePin, action):
 @app.route('/scheduler', methods = ['GET', 'POST'])
 def scheduler():
 
-    with sql.connect(dbFile) as con:
+    with sql.connect(sched_db) as con:
         cur = con.cursor()
     rows = cur.execute('SELECT * FROM schedules')
 
