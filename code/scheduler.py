@@ -1,11 +1,11 @@
 import sqlite3 as sql
 from crontab import CronTab
 import os, datetime
-from conf import pins, appDir, dbFile
+from conf import pins, appDir, sched_db
 
 cron = CronTab('root')
 
-con = sql.connect(dbFile)
+con = sql.connect(sched_db)
 con.row_factory = sql.Row
 
 cur = con.cursor()
