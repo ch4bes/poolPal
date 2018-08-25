@@ -2,8 +2,8 @@ version = '0.1'
 
 print('PoolPal - version ' + version)
 
-pool_pi_ip = 127.0.0.1
-esp_ip = 10.0.3.183
+pool_pi_ip = '127.0.0.1'
+esp_ip = '10.0.3.183'
 
 appDir = '/home/pi/poolPal/code/'
 sched_db = appDir + 'poolSchedules.db'
