@@ -19,7 +19,7 @@ GPIO.setmode(GPIO.BCM)
 # Set each pin as an output and set initial state:
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
+    GPIO.output(pin, pins[pin]['state'])
 
 def timestamp():
     timestamp = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
