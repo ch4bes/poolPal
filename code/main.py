@@ -14,6 +14,9 @@ from schedulerform import SchedulerForm
 from conf import *
 import datetime, os
 
+if os.path.isfile(sched_db) == False: # if sched_db doesn't exist:
+    os.system('sudo python ' + appDir + 'freshDB.py') # run freshDB.py
+
 GPIO.setmode(GPIO.BCM)
 
 # Set each pin as an output and set initial state:
