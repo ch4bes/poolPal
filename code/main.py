@@ -15,7 +15,7 @@ from conf import *
 import datetime, os
 
 if os.path.isfile(sched_db) == False: # if sched_db doesn't exist:
-    os.system('sudo python ' + appDir + 'freshDB.py') # run freshDB.py
+    os.system('sudo python ' + appDir + 'freshDB.py ' + sched_db) # run freshDB.py with sched_db file
 
 GPIO.setmode(GPIO.BCM)
 
