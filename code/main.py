@@ -14,8 +14,9 @@ from schedulerform import SchedulerForm
 from conf import *
 import datetime, os
 
-if os.path.isfile(sched_db) == False: # if sched_db doesn't exist:
-    os.system('sudo python ' + appDir + 'freshDB.py ' + sched_db) # run freshDB.py with sched_db file
+for dbFile in (sched_db, temp_db):
+    if os.path.isfile(db_file) == False: # if file doesn't exist:
+        os.system('sudo python3 ' + appDir + 'freshDB.py ' + dbFile) # run freshDB.py with proper db file
 
 GPIO.setmode(GPIO.BCM)
 
