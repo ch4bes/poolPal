@@ -12,7 +12,7 @@ import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, url_for
 from schedulerform import SchedulerForm
 from conf import *
-import datetime, os
+import datetime, os, urllib.request
 
 for dbFile in (sched_db, temp_db):
     if os.path.isfile(dbFile) == False: # if file doesn't exist:
@@ -29,6 +29,27 @@ def timestamp():
     timestamp = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
     return timestamp
 
+def getTemp():
+    temp = ''
+    attempt_count = 0
+    attempts_allowed = 3
+    while temp == '' and attempt_count < attempts_allowed:
+        print('Getting temp...')
+        try:
+            with urllib.request.urlopen('http://'+esp_ip) as f:
+                result = str(f.read())
+                for char in result:
+                    if char == '.' or char.isdigit() == True:
+                        temp += char
+                print(temp)
+                return temp
+        except Exception as e:
+            print(e, type(e))
+            attempt_count += 1
+            print('Connection errors: ' + str(attempt_count))
+            if attempt_count == attempts_allowed:
+                return 'No response from ESP32'
+
 message = ''
 
 app = Flask(__name__)
@@ -41,15 +62,15 @@ app.secret_key = 'development key'
 @app.route('/')
 def index():
     ip = request.remote_addr
-    # For each pin, read the pin state and store it in the pins dictionary:
-    for pin in pins:
+    for pin in pins:# For each pin, read the pin state and store it in the pins dictionary:
         pins[pin]['state'] = GPIO.input(pin)
-    # Put the variables into the template data dictionary:
-    templateData = {
+    temp = getTemp() # get temp from esp32
+    templateData = {# Put the variables into the template data dictionary:
         'ip' : ip,
         'pins' : pins,
         'version' : version,
-        'message' : message
+        'message' : message,
+        'temp' : temp
         }
 
     # Pass the template data into the template index.html and serve it to the user
