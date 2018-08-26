@@ -15,7 +15,7 @@ from conf import *
 import datetime, os
 
 for dbFile in (sched_db, temp_db):
-    if os.path.isfile(db_file) == False: # if file doesn't exist:
+    if os.path.isfile(dbFile) == False: # if file doesn't exist:
         os.system('sudo python3 ' + appDir + 'freshDB.py ' + dbFile) # run freshDB.py with proper db file
 
 GPIO.setmode(GPIO.BCM)
