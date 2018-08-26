@@ -9,9 +9,9 @@ appDir = '/home/pi/poolPal/code/'
 sched_db = appDir + 'poolSchedules.db'
 temp_db = appDir + 'tempLog.db'
 
-pins = { # Pin Dictionary to store each pin number, name, and state
-    17 : {'name':'Light', 'state':1},
-    18 : {'name':'Waterfall', 'state':1},
-    23 : {'name':'Main Pump', 'state':1},
-    27 : {'name':'Gazebo Lights', 'state':1}
+pins = { # Pin Dictionary to store each pin number, name, and initial state
+    17 : {'name':'Light', 'state':0},
+    18 : {'name':'Waterfall', 'state':0},
+    23 : {'name':'Main Pump', 'state':0},
+    27 : {'name':'Gazebo Lights', 'state':0}
     }
