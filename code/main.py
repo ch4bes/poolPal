@@ -10,6 +10,7 @@
 import sqlite3 as sql
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, url_for
+from crontab import CronTab
 from schedulerform import SchedulerForm
 from conf import *
 from logger import timestamp, getTemp
@@ -19,6 +20,17 @@ for dbFile in (sched_db, temp_db):
     if os.path.isfile(dbFile) == False: # if file doesn't exist:
         print('Creating ' + dbFile)
         os.system('sudo python3 ' + appDir + 'freshDB.py ' + dbFile) # run freshDB.py with proper db file
+        
+cron = CronTab('root')
+# check if cronjob exists
+search = cron.find_comment('templogger')
+if not sorted(search): # if search comes up empty
+    print('No cron job found for \'templogger\'\nCreating...')
+    job = cron.new(command=('sudo python3 ' + logger_path),comment='templogger')
+    job.setall(temp_log_interval)
+    job.enable()
+    cron.write()
+    print('Wrote new crontab')
 
 GPIO.setmode(GPIO.BCM)
 
