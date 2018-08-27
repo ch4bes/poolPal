@@ -13,6 +13,6 @@ conn = sqlite3.connect(dbFile)
 if dbFile == sched_db:    
     conn.execute('CREATE TABLE schedules (id INTEGER PRIMARY KEY, function TEXT, startHour INTEGER, startMin INTEGER, stopHour INTEGER, stopMin INTEGER)')
 if dbFile == temp_db:
-    conn.execute('CREATE TABLE temps (time INTEGER, temp FLOAT)')
+    conn.execute('CREATE TABLE temps (timestamp DATETIME, temp NUMERIC)')
     
 conn.close()
