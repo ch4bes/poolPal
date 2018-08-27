@@ -17,6 +17,7 @@ import datetime, os, urllib.request
 
 for dbFile in (sched_db, temp_db):
     if os.path.isfile(dbFile) == False: # if file doesn't exist:
+        print('Creating ' + dbFile)
         os.system('sudo python3 ' + appDir + 'freshDB.py ' + dbFile) # run freshDB.py with proper db file
 
 GPIO.setmode(GPIO.BCM)
