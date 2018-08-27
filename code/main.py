@@ -12,6 +12,7 @@ import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, url_for
 from schedulerform import SchedulerForm
 from conf import *
+from logger import timestamp, getTemp
 import datetime, os, urllib.request
 
 for dbFile in (sched_db, temp_db):
@@ -24,31 +25,6 @@ GPIO.setmode(GPIO.BCM)
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, pins[pin]['state'])
-
-def timestamp():
-    timestamp = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
-    return timestamp
-
-def getTemp():
-    temp = ''
-    attempt_count = 0
-    attempts_allowed = 3
-    while temp == '' and attempt_count < attempts_allowed:
-        print('Getting temp...')
-        try:
-            with urllib.request.urlopen('http://'+esp_ip) as f:
-                result = str(f.read())
-                for char in result:
-                    if char == '.' or char.isdigit() == True:
-                        temp += char
-                print(temp)
-                return temp
-        except Exception as e:
-            print(e, type(e))
-            attempt_count += 1
-            print('Connection errors: ' + str(attempt_count))
-            if attempt_count == attempts_allowed:
-                return 'No response from ESP32'
 
 message = ''
 
