@@ -19,19 +19,19 @@
 
    <hr>
    {% for pin in pins %}
-   <h2>{{ pins[pin].name }}
-   {% if pins[pin].name.endswith('s') == true %}
-      are
-   {% elif pins[pin].name.endswith('s') == false %}
-      is
-   {% endif %}
-   {% if pins[pin].state == false %}
-      currently <strong id="off">off</strong></h2><div class="row"><div class="col-md-2">
-      <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
-   {% elif pins[pin].state == true %}
-      currently <strong id="on">on</strong></h2><div class="row"><div class="col-md-2">
-      <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
-   {% endif %}
+      <h2>{{ pins[pin].name }}
+      {% if pins[pin].name.endswith('s') == true %}
+         are
+      {% elif pins[pin].name.endswith('s') == false %}
+         is
+      {% endif %}
+      {% if pins[pin].state == false %}
+         currently <strong id="off">off</strong></h2><div class="row"><div class="col-md-2">
+         <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
+      {% elif pins[pin].state == true %}
+         currently <strong id="on">on</strong></h2><div class="row"><div class="col-md-2">
+         <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
+      {% endif %}
    {% endfor %}
 
    <hr>
