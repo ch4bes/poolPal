@@ -1,7 +1,7 @@
 version = '0.1'
 
 pool_pi_ip = '127.0.0.1'
-esp_ip = '10.0.3.183'
+esp_ip = '10.0.3.165'
 
 appDir = '/home/pi/poolPal/code/'
 sched_db = appDir + 'poolSchedules.db'
